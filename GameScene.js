@@ -237,7 +237,62 @@ let gameState = {
       gameState.specialButton = this.add.sprite(390, 550, 'Special').setInteractive();
   
       // Add your information text and styling below: 
-  
+      const style = {
+        font: '16px Hevetica',
+        fill: '#000000',
+        padding: {
+            x:6,
+            y:7
+        }
+      }
+
+      gameState.playerMove = this.add.text(
+        // X-coord
+        65, 
+        // Y-coord
+        140,
+        // text 
+        '', 
+        style
+        );
+
+      gameState.computerMove = this.add.text(
+        // X
+        320,
+        // Y
+        140,
+        // Text
+        '',
+        style
+      );
+      gameState.information = this.add.text(
+        // x
+        140,
+        // y
+        80,
+        '',
+        style
+      );
+      
+      gameState.playerHealthBar = this.add.text(
+        // X
+        45,
+        // Y
+        45,
+        // Iterate Player Health
+        `HP: ${gameState.player.health}`,
+        style
+      );
+
+      gameState.computerHealthBar = this.add.text(
+        // X
+        375,
+        // Y
+        45,
+        // Iterate Computer Health
+        `HP: ${gameState.computer.health}`,
+        style
+      );
   
   
   
