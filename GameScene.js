@@ -354,17 +354,21 @@ let gameState = {
           gameState.computerSprite.anims.play(
             `${gameState.computer.name}Attack`,
           );
-        } else {
-            gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 4 HP`;
-            gameState.playerMove.text = 'Attack';
-            gameState.computerMove.text = 'Special Attack';
-            gameState.computer.health -= 4;
-
-            gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
-            gameState.player.sprite.aims.play('playerAttack');
-            gameState.computerSprite.anims.play(
-                `${gameState.computer.name}Special`,
-            );
+        } else if (randomMove === 1) {
+            gameState.information.text = `Both Players Defend`;
+            gameState.playerMove.text = 'Defend';
+            gameState.computerMove.text = 'Defend';
+            gameState.player.sprite.aims.play('playerDefend');
+            gameState.computerSprite.aims.play(`${gameState.computer.name}Defend`);
+        }
+        else {
+          gameState.information.text = `The player loses 1 HP`;
+          gameState.playerMove.text = 'Defend';
+          gameState.computerMove.text = 'Special Attack';
+          gameState.playerHealthBar.text = `HP: ${gameState.player.health}`;
+          gameState.player.health -= 4;
+          gameState.player.sprite.anims.play('playerDefend');
+          gameState.computerSprite.anims.play(`${gameState.computerSprite.name}Special`)
         }
       });
       
