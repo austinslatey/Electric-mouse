@@ -301,8 +301,40 @@ let gameState = {
         this.pauseIdle()
         if (game.input.enabled) {
           // Add your code for Electric Mouse attacking below:
-          
-        
+         let randomMove = Math.floor(Math.random() * 3);
+         if(randomMove === 0) {
+            gameState.information.text = `Both players lose 1 HP!`;
+            gameState.playerMove.text = 'Attack!!!';
+            gameState.computerMove.text = 'Attack!!!';
+            gameState.player.health -= 1;
+            gameState.computer.health -= 1;
+            gameState.playerHealthBar.text = `HP: ${gameState.player.health}`;
+            gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
+            gameState.player.sprite.aims.play(`${gameState.computer.name}Attack`);
+            gameState.player.sprite.aims.play('playerAttack');
+            gameState.computerSprite.anims.play(`${gameState.computer.name}Attack`,
+            );
+         } else if(randomMove === 1) {
+            gameState.information.text = `Hp: ${gameState.player.health}`;
+            gameState.playerMove.text = 'Attack';
+            gameState.computerMove.text = 'Defend';
+            gameState.player.health -= 1;
+            gameState.playerHealthBar.text = `The ${gameState.player.health}`;
+            gameState.player.sprite.anims.play('playerAttack');
+            gameState.computerSprite.anims.play(
+                `${gameState.computer.name}Defend`,
+            );
+         } else {
+            gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 4 HP!`;
+            gameState.playerMove.text = 'Attack!';
+            gameState.computerMove.text = 'Special Attack!';
+            gameState.computer.health -= 4;
+            gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
+            gameState.player.sprite.anims.play('playerAttack');
+            gameState.computerSprite.anims.play(
+              `${gameState.computer.name}Special`,
+            );
+         }
         }
       });
       
@@ -311,41 +343,68 @@ let gameState = {
         this.pauseIdle()
         if (game.input.enabled) {
           // Add your code for Electric Mouse defending below:
-  
+          let randomMove = Math.floor(Math.random() * 3);   
+        } else if (randomMove === 0) {
+          gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 1 HP!`;
+          gameState.playerMove.text = 'Defend!';
+          gameState.computerMove.text = 'Attack!';
+          gameState.computer.health -= 1;
+          gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
+          gameState.player.sprite.anims.play('playerDefend');
+          gameState.computerSprite.anims.play(
+            `${gameState.computer.name}Attack`,
+          );
+        } else {
+            gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 4 HP`;
+            gameState.playerMove.text = 'Attack';
+            gameState.computerMove.text = 'Special Attack';
+            gameState.computer.health -= 4;
+
+            gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
+            gameState.player.sprite.aims.play('playerAttack');
+            gameState.computerSprite.anims.play(
+                `${gameState.computer.name}Special`,
+            );
         }
       });
       
       // Special Attack button logic (use for reference):
       gameState.specialButton.on('pointerup', () => {
-        this.pauseIdle()
+        this.pauseIdle();
         if (game.input.enabled) {
           let randomMove = Math.floor(Math.random() * 3);
           if (randomMove === 0) {
-            gameState.information.text = `The player loses 1 HP!`;
-            gameState.playerMove.text = 'Special Attack!';
-            gameState.computerMove.text = 'Attack!';
+            gameState.information.text = `The player loses 1 HP`;
+            gameState.playerMove.text = 'Special Attack';
+            gameState.computerMove.text = 'Attack';
             gameState.player.health -= 1;
             gameState.playerHealthBar.text = `HP: ${gameState.player.health}`;
             gameState.player.sprite.anims.play('playerSpecial');
-            gameState.computerSprite.anims.play(`${gameState.computer.name}Attack`);
+            gameState.computerSprite.anims.play(
+              `${gameState.computer.name}Attack`,
+            );
           } else if (randomMove === 1) {
-            gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 4 HP!`;
-            gameState.playerMove.text = 'Special Attack!';
-            gameState.computerMove.text = 'Defend!';
+            gameState.information.text = `The ${gameState.computerSprite.texture.key} loses 4 HP`;
+            gameState.playerMove.text = 'Special Attack';
+            gameState.computerMove.text = 'Defend';
             gameState.computer.health -= 4;
             gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
             gameState.player.sprite.anims.play('playerSpecial');
-            gameState.computerSprite.anims.play(`${gameState.computer.name}Defend`);
+            gameState.computerSprite.anims.play(
+              `${gameState.computer.name}Defend`,
+            );
           } else {
-            gameState.information.text = `You both lose 10 HP!`;
-            gameState.playerMove.text = 'Special Attack!';
-            gameState.computerMove.text = 'Special Attack!';
+            gameState.information.text = `You both lose 10 HP`;
+            gameState.playerMove.text = 'Special Attack';
+            gameState.computerMove.text = 'Special Attack';
             gameState.player.health -= 10;
             gameState.playerHealthBar.text = `HP: ${gameState.player.health}`;
             gameState.computer.health -= 10;
             gameState.computerHealthBar.text = `HP: ${gameState.computer.health}`;
             gameState.player.sprite.anims.play('playerSpecial');
-            gameState.computerSprite.anims.play(`${gameState.computer.name}Special`);
+            gameState.computerSprite.anims.play(
+              `${gameState.computer.name}Special`,
+            );
           }
         }
       });
